@@ -66,6 +66,9 @@ async function getAllTimes() {
   const db = firebase.firestore();
   const fruitsRef = db.collection('time');
   const querySnapshot = await fruitsRef.get();
+  if (querySnapshot.empty) {
+    console.log("Time queue is empty");
+  }
   querySnapshot.forEach((doc) => {
     console.log(toDateString(doc.data()["time"]["seconds"]));
     
